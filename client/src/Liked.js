@@ -13,7 +13,7 @@ const Liked = () => {
     const fetchLikedProperties = async () => {
       try {
         console.log(userId,"like");
-        const response = await axios.post('http://localhost:8081/liked-properties', { userId:userId });
+        const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/liked-properties', { userId:userId });
         setLikedProperties(response.data);
         setLoading(false);
       } catch (error) {

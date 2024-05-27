@@ -32,7 +32,7 @@ const SignupForm = () => {
     console.log(user, "Node");
 
     try {
-      const response = await fetch('http://localhost:8081/data', {
+      const response = await fetch('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ const EnquiredProperties = () => {
   useEffect(() => {
     const fetchEnquiredProperties = async () => {
       try {
-        const response = await axios.post('http://localhost:8081/enquired-properties', { userId:userId });
+        const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/enquired-properties', { userId:userId });
         setEnquiredProperties(response.data);
         console.log(response.data)
         setLoading(false);

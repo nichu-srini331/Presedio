@@ -11,7 +11,7 @@ const Myproperty = () => {
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
-        const response = await axios.post('http://localhost:8081/user-properties', { userId:userId });
+        const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/user-properties', { userId:userId });
         setUserProperties(response.data);
         setLoading(false);
       } catch (error) {

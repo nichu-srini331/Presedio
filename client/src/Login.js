@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8081/login', { username, password });
+      const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/login', { username, password });
       if (response.status === 200) {
         console.log(response.data.email,"sumi")
         const userId = response.data.userId; // Get the user ID from the response

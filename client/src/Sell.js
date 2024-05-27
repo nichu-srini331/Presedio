@@ -53,7 +53,7 @@ const Sell = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8081/properties', formData, {
+      const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/properties', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

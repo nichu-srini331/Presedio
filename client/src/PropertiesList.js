@@ -14,7 +14,7 @@ const PropertiesList = ({ email }) => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/properties');
+        const response = await axios.get('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/properties');
         setProperties(response.data);
         setFilteredProperties(response.data);
         
