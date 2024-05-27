@@ -90,7 +90,7 @@ const PropertiesList = ({ email }) => {
       alert('You need to be logged in to like a property');
       return;
     }
-    setTxt("Liked");
+    alert("Liked Property");
     try {
       await axios.post(`${API_BASE_URL}/properties/${propertyId}/like`, { userId: id });
       setProperties((prevProperties) =>
@@ -170,7 +170,7 @@ const PropertiesList = ({ email }) => {
                   <Button variant="secondary" className='btn-enq' onClick={() => handleEnquiry(property.email, property.id)}>
                     Interested
                   </Button>
-                  <Button variant="primary" className='btn-like' onClick={() => handleLike(property.id)}>{txt}</Button>
+                  <Button variant="primary" className='btn-like' onClick={() => handleLike(property.id)}>Like</Button>
                 </div>
                 <span variant="primary" className='btn-more' onClick={() => handleShowModal(property)}>More</span>
               </Card.Body>

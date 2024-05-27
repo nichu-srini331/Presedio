@@ -72,10 +72,10 @@ const Dashboard = () => {
     <div>
         <Container>
             <Row>
-                <span onClick={handleLogoClick}><Col className='logo-dash'>
-                <img src={logo} width={240} height={200} />   
+              <Col className='logo-dash'>
+                <img src={logo} width={240} height={200} onClick={handleLogoClick} />   
                 </Col>
-                </span>
+                
                 <Col className='menu'><button className='men' onClick={Likeds}>Liked</button>
                     <button className='men' onClick={Enquired}>Enquired</button>
                     <button className='men' onClick={Property}>My Property</button> 
