@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { auth } from './firebase'; // Import Firebase auth
 import './PropertiesList.css'; // Import the CSS file for styling
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button,Modal} from 'react-bootstrap';
 import API_BASE_URL from './config';
 
 const PropertiesList = ({ email }) => {
@@ -11,6 +11,10 @@ const PropertiesList = ({ email }) => {
   const [user, setUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const id = localStorage.getItem('userId');
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [propertiesPerPage] = useState(10);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -87,7 +91,7 @@ const PropertiesList = ({ email }) => {
     }
 
     try {
-      await axios.post(`http://localhost:8081/properties/${propertyId}/like`, { userId: id });
+      await axios.post(`http://localhost:3001/properties/${propertyId}/like`, { userId: id });
       setProperties((prevProperties) =>
         prevProperties.map((property) =>
           property.id === propertyId
@@ -103,7 +107,7 @@ const PropertiesList = ({ email }) => {
   const handleEnquiry = async (ownerEmail, propertyId) => {
     console.log(propertyId,"props")
     try {
-      await axios.post('http://localhost:8081/enquiry', {
+      await axios.post('http://localhost:3001/enquiry', {
         senderEmail: email,
         ownerEmail: ownerEmail,
         id: id,
@@ -115,6 +119,23 @@ const PropertiesList = ({ email }) => {
       alert('Failed to send enquiry');
     }
   };
+  
+
+  const handleShowModal = (property) => {
+    setSelectedProperty(property);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedProperty(null);
+  };
+
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="property-list-container">
@@ -127,7 +148,7 @@ const PropertiesList = ({ email }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div className="property-list">
-        {filteredProperties
+        {currentProperties
           .filter(property => property.owner !== id)
           .map((property) => (
             <Card key={property.id} style={{ width: '18rem', margin: '1rem' }}>
@@ -136,31 +157,65 @@ const PropertiesList = ({ email }) => {
               )}
               <Card.Body>
                 <Card.Title>{property.title}</Card.Title>
-                <Card.Text>{property.description}</Card.Text>
-                <Card.Text>Address: {property.address}</Card.Text>
                 <Card.Text>Price: ${property.price}</Card.Text>
                 <Card.Text>Type: {property.type}</Card.Text>
-                <Card.Text>Bathrooms: {property.no_of_bath}</Card.Text>
                 <Card.Text>Bedrooms: {property.no_of_bed}</Card.Text>
-                <Card.Text>Square Feet: {property.square_feet}</Card.Text>
-                <Card.Text>Amenities: {property.amenities}</Card.Text>
-                <Card.Text>Nearby Metro: {property.metro}</Card.Text>
-                <Card.Text>Nearby Bus Stand: {property.bus_stand}</Card.Text>
-                <Card.Text>Nearby Hospital: {property.hospital}</Card.Text>
-                <Card.Text>Nearby School: {property.school}</Card.Text>
-                <Card.Text>Nearby Market: {property.market}</Card.Text>
-                <Card.Text>Other Details: {property.others}</Card.Text>
-                <Button variant="primary" onClick={() => handleLike(property.id)}>Like</Button>
-                <span className="property-card-like-count">{property.likes}:likes</span>
-                <Button variant="secondary" className='btn-enq' onClick={() => handleEnquiry(property.email, property.id)}>
-                  Send Enquiry
-                </Button>
+                <p>Likes: {property.likes}</p>
+                <div className='btn-card'>
+                  <Button variant="secondary" className='btn-enq' onClick={() => handleEnquiry(property.email, property.id)}>
+                    Interested
+                  </Button>
+                  <Button variant="primary" className='btn-like' onClick={() => handleLike(property.id)}>Like</Button>
+                </div>
+                <span variant="primary" className='btn-more' onClick={() => handleShowModal(property)}>More</span>
               </Card.Body>
             </Card>
           ))}
       </div>
+      <div className="pagination">
+        {Array.from({ length: Math.ceil(filteredProperties.length / propertiesPerPage) }, (_, index) => (
+          <Button key={index + 1} onClick={() => paginate(index + 1)} className="page-link">
+            {index + 1} - Page 
+          </Button>
+        ))}
+      </div>
+
+      {selectedProperty && (
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedProperty.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedProperty.photos.length > 0 && (
+              <img src={selectedProperty.photos[0]} alt={`Property ${selectedProperty.title}`} className="img-fluid" />
+            )}
+            <p>{selectedProperty.description}</p>
+            <p>Address: {selectedProperty.address}</p>
+            <p>Price: ${selectedProperty.price}</p>
+            <p>Type: {selectedProperty.type}</p>
+            <p>Bathrooms: {selectedProperty.no_of_bath}</p>
+            <p>Bedrooms: {selectedProperty.no_of_bed}</p>
+            <p>Square Feet: {selectedProperty.square_feet}</p>
+            <p>Amenities: {selectedProperty.amenities}</p>
+            <p>Nearby Metro: {selectedProperty.metro}</p>
+            <p>Nearby Bus Stand: {selectedProperty.bus_stand}</p>
+            <p>Nearby Hospital: {selectedProperty.hospital}</p>
+            <p>Nearby School: {selectedProperty.school}</p>
+            <p>Nearby Market: {selectedProperty.market}</p>
+            <p>Other Details: {selectedProperty.others}</p>
+            <p>Likes: {selectedProperty.likes}</p>
+            <Button variant="primary" onClick={() => handleLike(selectedProperty.id)}>Like</Button>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
+
 };
 
 export default PropertiesList;

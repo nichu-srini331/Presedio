@@ -24,9 +24,9 @@ const ProfileDropdown = () => {
     <div className="profile-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <CgProfile className="profile" />
       <div className={`dropdown-menu ${dropdownActive ? 'active' : ''}`}>
-        <div className="dropdown-menu-item">My Property</div>
-        <div className="dropdown-menu-item">Enquired Property</div>
-        <div className="dropdown-menu-item">Liked Property</div>
+        <div className="dropdown-menu-item">My Profile</div>
+        <div className="dropdown-menu-item">Help</div>
+        <div className="dropdown-menu-item">Settings</div>
         <div className="dropdown-menu-item"><button onClick={logout}>Logout</button></div>
       </div>
     </div>

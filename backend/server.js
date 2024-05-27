@@ -533,7 +533,7 @@ app.post('/login', async (req, res) => {
 
 // })
   
-const Port = process.env.PORT || 3000;
+const Port = process.env.PORT || 3001;
 app.listen(Port, () => {
-    console.log("Server running on port 8081");
+    console.log("Server running on port ",Port);
 });

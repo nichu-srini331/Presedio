@@ -26,7 +26,7 @@ const Myproperty = () => {
 
   const handleDelete = async (propertyId) => {
     try {
-      await axios.delete(`http://localhost:8081/user-properties/${userId}/${propertyId}`);
+      await axios.delete(`http://localhost:3001/user-properties/${userId}/${propertyId}`);
       setUserProperties(userProperties.filter(property => property.id !== propertyId));
     } catch (error) {
       console.error('Error deleting property:', error);

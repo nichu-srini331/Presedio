@@ -12,6 +12,8 @@
 }
 .menu{
     display: flex;
+    margin-top: -30px !important;
+    margin-right: 30px !important;
 }
 .men {
     background: none;
@@ -21,7 +23,7 @@
     cursor: pointer;
     font-size: 22px;
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     height: auto; /* Adjust the height */
   }
   
