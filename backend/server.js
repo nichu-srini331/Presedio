@@ -373,7 +373,7 @@ app.get('/properties', async (req, res) => {
       res.status(500).json({ message: 'Failed to send enquiry' });
     }
   });
-  app.get('/api/hello', (req, res) => {
+  app.get('/', (req, res) => {
     res.json({ message: 'Hello from the backend!' });
   });
   
