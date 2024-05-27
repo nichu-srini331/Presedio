@@ -37,6 +37,10 @@ const Dashboard = () => {
 
   }
 
+  const handleLogoClick =() =>{
+    navigate('/')
+  }
+
   const Likeds = () => {
     setallprop(false);
     setLike(true)
@@ -68,9 +72,10 @@ const Dashboard = () => {
     <div>
         <Container>
             <Row>
-                <Col className='logo-dash'>
+                <span onClick={handleLogoClick}><Col className='logo-dash'>
                 <img src={logo} width={240} height={200} />   
                 </Col>
+                </span>
                 <Col className='menu'><button className='men' onClick={Likeds}>Liked</button>
                     <button className='men' onClick={Enquired}>Enquired</button>
                     <button className='men' onClick={Property}>My Property</button> 

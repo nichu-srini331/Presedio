@@ -15,6 +15,7 @@ const PropertiesList = ({ email }) => {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [propertiesPerPage] = useState(10);
+  const[txt,setTxt] = useState("Like");
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -89,9 +90,9 @@ const PropertiesList = ({ email }) => {
       alert('You need to be logged in to like a property');
       return;
     }
-
+    setTxt("Liked");
     try {
-      await axios.post(`http://localhost:3001/properties/${propertyId}/like`, { userId: id });
+      await axios.post(`${API_BASE_URL}/properties/${propertyId}/like`, { userId: id });
       setProperties((prevProperties) =>
         prevProperties.map((property) =>
           property.id === propertyId
@@ -99,6 +100,7 @@ const PropertiesList = ({ email }) => {
             : property
         )
       );
+      
     } catch (error) {
       console.error('Error liking property:', error);
     }
@@ -107,7 +109,7 @@ const PropertiesList = ({ email }) => {
   const handleEnquiry = async (ownerEmail, propertyId) => {
     console.log(propertyId,"props")
     try {
-      await axios.post('http://localhost:3001/enquiry', {
+      await axios.post(`${API_BASE_URL}/enquiry`, {
         senderEmail: email,
         ownerEmail: ownerEmail,
         id: id,
@@ -116,7 +118,7 @@ const PropertiesList = ({ email }) => {
       alert('Enquiry sent successfully');
     } catch (error) {
       console.error('Error sending enquiry:', error);
-      alert('Failed to send enquiry');
+      alert('Failed to send enquiry,logout and try again');
     }
   };
   
@@ -130,6 +132,9 @@ const PropertiesList = ({ email }) => {
     setShowModal(false);
     setSelectedProperty(null);
   };
+
+
+  
 
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
@@ -165,7 +170,7 @@ const PropertiesList = ({ email }) => {
                   <Button variant="secondary" className='btn-enq' onClick={() => handleEnquiry(property.email, property.id)}>
                     Interested
                   </Button>
-                  <Button variant="primary" className='btn-like' onClick={() => handleLike(property.id)}>Like</Button>
+                  <Button variant="primary" className='btn-like' onClick={() => handleLike(property.id)}>{txt}</Button>
                 </div>
                 <span variant="primary" className='btn-more' onClick={() => handleShowModal(property)}>More</span>
               </Card.Body>
