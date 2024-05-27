@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Enq.css'; // Import the CSS file for styles
+import API_BASE_URL from './config';
 
 const EnquiredProperties = () => {
   const [enquiredProperties, setEnquiredProperties] = useState([]);
@@ -10,7 +11,7 @@ const EnquiredProperties = () => {
   useEffect(() => {
     const fetchEnquiredProperties = async () => {
       try {
-        const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/enquired-properties', { userId:userId });
+        const response = await axios.post(`${API_BASE_URL}/enquired-properties`, { userId:userId });
         setEnquiredProperties(response.data);
         console.log(response.data)
         setLoading(false);

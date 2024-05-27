@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Myproperty.css'; // Import the CSS file for styles
 import {  Button } from 'react-bootstrap';
+import API_BASE_URL from './config';
 
 const Myproperty = () => {
   const [userProperties, setUserProperties] = useState([]);
@@ -11,7 +12,7 @@ const Myproperty = () => {
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
-        const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/user-properties', { userId:userId });
+        const response = await axios.post(`${API_BASE_URL}/user-properties`, { userId:userId });
         setUserProperties(response.data);
         setLoading(false);
       } catch (error) {

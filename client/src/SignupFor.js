@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import './SignupForm.css';
+import API_BASE_URL from './config';
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -32,7 +33,7 @@ const SignupForm = () => {
     console.log(user, "Node");
 
     try {
-      const response = await fetch('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/data', {
+      const response = await fetch(`${API_BASE_URL}/data`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

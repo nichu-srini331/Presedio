@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Liked.css'; // Import the CSS file for styles
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import API_BASE_URL from './config';
+
 
 const Liked = () => {
   const [likedProperties, setLikedProperties] = useState([]);
@@ -13,7 +15,7 @@ const Liked = () => {
     const fetchLikedProperties = async () => {
       try {
         console.log(userId,"like");
-        const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/liked-properties', { userId:userId });
+        const response = await axios.post(`${API_BASE_URL}/liked-properties`, { userId:userId });
         setLikedProperties(response.data);
         setLoading(false);
       } catch (error) {

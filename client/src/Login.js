@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';
 import './Login.css'; // Import the CSS file for styling
 import logo from './rent-logo.png'
+import API_BASE_URL from './config';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/login', { username, password });
+      const response = await axios.post(`${API_BASE_URL}/login`, { username, password });
       if (response.status === 200) {
         console.log(response.data.email,"sumi")
         const userId = response.data.userId; // Get the user ID from the response

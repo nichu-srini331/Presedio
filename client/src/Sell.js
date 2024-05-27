@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate,useLocation } from 'react-router-dom';
 import './Sell.css'; // Import the CSS file
+import API_BASE_URL from './config';
 
 const Sell = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const Sell = () => {
     }
 
     try {
-      const response = await axios.post('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/properties', formData, {
+      const response = await axios.post(`${API_BASE_URL}/properties`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

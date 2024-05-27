@@ -3,6 +3,7 @@ import axios from 'axios';
 import { auth } from './firebase'; // Import Firebase auth
 import './PropertiesList.css'; // Import the CSS file for styling
 import { Card, Button } from 'react-bootstrap';
+import API_BASE_URL from './config';
 
 const PropertiesList = ({ email }) => {
   const [properties, setProperties] = useState([]);
@@ -14,7 +15,7 @@ const PropertiesList = ({ email }) => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('https://rentifyapp-j2zt7asl6-nichusrini331s-projects.vercel.app/properties');
+        const response = await axios.get(`${API_BASE_URL}/properties`);
         setProperties(response.data);
         setFilteredProperties(response.data);
         
