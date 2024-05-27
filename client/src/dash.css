@@ -1,0 +1,54 @@
+.logo-dash{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: -50px !important;
+}
+
+.mid-dash{
+
+
+
+}
+.menu{
+    display: flex;
+}
+.men {
+    background: none;
+    border: none;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 22px;
+    margin-left: 10px;
+    margin-top: 20px;
+    height: auto; /* Adjust the height */
+  }
+  
+  .men:hover {
+    color: #0056b3;
+  }
+
+.btn-dash {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 30px !important;
+    margin-left: 20px !important;
+  }
+  
+  .btn-dash:hover {
+    background-color: #218838;
+  }
+
+  .profile{
+    width: 50px !important; 
+    height: 50px !important;
+    margin-top: 25px;
+  }

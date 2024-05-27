@@ -1,0 +1,50 @@
+.sell-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.sell-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.sell-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sell-label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.sell-input,
+.sell-textarea,
+.sell-select {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sell-input[type="file"] {
+  border: none;
+}
+
+.sell-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer
+}
+.sell-button:hover {
+  background-color: #0056b3;
+}
