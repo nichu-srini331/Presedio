@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 let bodyParser = require('body-parser');
 const cors = require("cors");
 const multer = require('multer');
-const { admin, db, bucket } = require('../firebase');
+const { admin, db, bucket } = require('./firebase');
 const { v4: uuidv4 } = require('uuid');
 const nodemailer = require('nodemailer');
 
