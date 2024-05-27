@@ -25,6 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://rentifyapp-h8tpaw5mo-nichusrini331s-projects.vercel.app",
   "eslintConfig": {
     "extends": [
       "react-app",
